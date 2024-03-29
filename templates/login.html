@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход</title>
-    <link href="/api/static/css/output.css" rel="stylesheet">
+    <link href="../static/css/output.css" rel="stylesheet">
     <link rel="icon" href="/static/favicon/favicon.ico" type="image/x-icon">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -31,7 +31,7 @@
                     responsecode=response.status
                     switch (responsecode){
                         case response.status=303:
-                            
+
                     }
                     const errorMessage = await response.text();
                     window.location.replace("404.html");
@@ -60,13 +60,13 @@
     </script>
 </head>
 <body >
-<div class="h-screen w-screen bg-gray-900 bg-cover bg-no-repeat" style="background-image: url('/api/static/images/background.png');">
+<div class="h-screen w-screen bg-gray-900 bg-cover bg-no-repeat" style="background-image: url('/static/images/background.png');">
 
 
     <div class="hidden lg:flex h-full w-full justify-center items-center">
         <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-10 py-10 sm:px-10 sm:mb-8 sm:py-14 md:px-20 md:py-20 shadow-2xl backdrop-blur-md">
             <div class=" flex w-20 h-20 md:w-48 md:h-48 rounded-lg mx-auto ">
-                <img src="/api/static/images/svgexport-1.svg" >
+                <img src="/static/images/svgexport-1.svg" >
             </div>
 
             <div class="relative top-0 ">
@@ -95,7 +95,7 @@
 
 
                 <div class="absolute  top-2 md:-right-20 md:top-2 size-16 md:w-36 md:h-36">
-                    <a href="/api/v1">
+                    <a href="/">
                         <svg width="50px" height="50px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
                             <g fill="none" fill-rule="evenodd" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)">
                                 <circle cx="8.5" cy="8.5" r="8"/>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="flex flex-col ml-8">
 
-                    <form id="loginForm" action="/api/v1/users/login" method="post" class="flex flex-col items-center justify-center mt-16 px-14 space-y-6">
+                    <form id="loginForm" action="/login" method="post" class="flex flex-col items-center justify-center mt-16 px-14 space-y-6">
 
                         <input type="email" name="email" class="  rounded-3xl bg-gray-800 bg-opacity-40 border border-gray-300 text-white text-center  px-16 py-2 " placeholder="user@vk.com" title="Please enter a valid email address" required>
                         <input type="password" name="password" class="rounded-3xl bg-gray-800 bg-opacity-40 border border-gray-300 text-white text-center px-16 py-2" placeholder="******" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$" title="Password should be at least 8 characters long, containing at least one lowercase, one uppercase, one digit, and one special character" required>
@@ -129,14 +129,14 @@
     <div class="lg:hidden flex h-full w-full flex-col justify-center items-center">
         <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-4 py-8 sm:px-10 sm:py-10 md:px-16 md:py-16 shadow-2xl backdrop-blur-md">
             <div class=" flex w-48 h-48 mx-auto rounded-lg">
-                <img src="/api/static/images/svgexport-1.svg" >
+                <img src="/static/images/svgexport-1.svg" >
             </div>
             <div class="relative">
 
                 <h1 class="text-center mt-4 text-sm text-white text-xl md:text-3xl mb-4">Вход в маркетплейс</h1>
             </div>
             <div class="absolute top-2 sm:-right-20 size-16 sm:w-36 sm:h-36">
-                <a href="/api/v1">
+                <a href="/">
                     <svg width="50px" height="50px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
                         <g fill="none" fill-rule="evenodd" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)">
                             <circle cx="8.5" cy="8.5" r="8"/>
@@ -152,7 +152,7 @@
             <div class="flex flex-col space-y-4">
                 <div class="flex flex-col">
 
-                    <form id="loginFormMobile" action="/api/v1/users/login" method="post" class="flex flex-col items-center justify-center mt-16 px-14 space-y-6">
+                    <form id="loginFormMobile" action="/login" method="post" class="flex flex-col items-center justify-center mt-16 px-14 space-y-6">
 
                         <div class="relative">
                             <svg class="absolute top-1/2 transform -translate-y-1/2 left-4 fill-current text-gray-400" width="30" height="30" viewBox="0 0 100 100">     <path d="M66.097,12.089h-56.9C4.126,12.089,0,16.215,0,21.286v32.722c0,5.071,4.126,9.197,9.197,9.197h56.9
