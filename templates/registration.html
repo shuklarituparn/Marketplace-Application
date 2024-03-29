@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link href="/api/static/css/output.css" rel="stylesheet">
+    <link rel="icon" href="/static/favicon/favicon.ico" type="image/x-icon">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const normalForm = document.getElementById("loginForm");
+            const mobileForm = document.getElementById("loginFormMobile");
+            normalForm.addEventListener("submit", handleformsubmit);
+            mobileForm.addEventListener("submit", handleformsubmit);
+
+            async function postFormDataAsJson({url, formData}) {
+                const plainFormData = Object.fromEntries(formData.entries());
+                const formDataJsonString = JSON.stringify(plainFormData);
+                const fetchOptions = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json"
+                    },
+                    body: formDataJsonString,
+                }
+                const response = await fetch(url, fetchOptions);
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    throw new Error(errorMessage);
+                }
+
+                return response.json();
+            }
+
+            async function handleformsubmit(event) {
+                event.preventDefault();
+                const form = event.currentTarget;
+                const url = form.action;
+                try {
+                    const formData = new FormData(form);
+                    const responseData = await postFormDataAsJson({url, formData});
+                    console.log({responseData})
+                } catch (error) {
+                    console.error(error)
+                }
+
+            }
+        });
+
+    </script>
+</head>
+<body >
+<div class="h-screen w-screen bg-gray-900 bg-cover bg-no-repeat" style="background-image: url('/api/static/images/background.png');">
+
+
+    <div class="hidden lg:flex h-full w-full justify-center items-center">
+        <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-10 py-10 sm:px-10 sm:mb-8 sm:py-14 md:px-20 md:py-20 shadow-2xl backdrop-blur-md">
+            <div class=" flex w-20 h-20 md:w-48 md:h-48 rounded-lg mx-auto ">
+                <img src="/api/static/images/svgexport-1.svg"  alt="VK ID">
+            </div>
+
+            <div class="relative top-0 ">
+                <h1 class="VK-Sans text-center  text-sm text-white text-xl md:text-3xl mb-8">Регистрация</h1>
+            </div>
+
+            <div class="flex flex-row  items-center justify-center">
+                <div class="flex flex-col space-y-14">
+                    <div class="flex flex-row space-x-14 items-center justify-center">
+                        <p class="text-center text-xl text-white VK-Sans">E-Mail</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="94" height="32" viewBox="0 0 94 32" fill="none">
+                            <path d="M77 1L93 16L77 31" stroke="white"/>
+                            <path d="M93 16L0 16" stroke="white"/>
+                        </svg>
+                    </div>
+
+                    <div class="flex flex-row space-x-14 items-center justify-center">
+                        <p class="text-center text-xl text-white VK-Sans">Пароль</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="94" height="32" viewBox="0 0 94 32" fill="none">
+                            <path d="M77 1L93 16L77 31" stroke="white"/>
+                            <path d="M93 16L0 16" stroke="white"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="absolute  top-2 md:-right-20 md:top-2 size-16 md:w-36 md:h-36">
+                    <a href="/api/v1/">
+                        <svg width="50px" height="50px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+                            <g fill="none" fill-rule="evenodd" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)">
+                                <circle cx="8.5" cy="8.5" r="8"/>
+                                <g transform="matrix(0 1 -1 0 17 0)">
+                                    <path d="m5.5 11.5 6-6"/>
+                                    <path d="m5.5 5.5 6 6"/>
+                                </g>
+                            </g>
+                        </svg>
+
+                    </a>
+                </div>
+                <div class="flex flex-col ml-8">
+
+                    <form  id="loginForm" action="/api/v1/users/register" method="post" class="flex flex-col items-center justify-center mt-16 px-14 space-y-6">
+
+                        <input  type="email" name="email" class="  rounded-3xl bg-gray-800 bg-opacity-40 border border-gray-300 text-white text-center  px-16 py-2 pl-svg" placeholder="user@vk.com" title="Please enter a valid email address" required>
+                        <input type="password" name="password" class="rounded-3xl bg-gray-800 bg-opacity-40 border border-gray-300 text-white text-center px-16 py-2" placeholder="******" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{8,}$" title="Password should be at least 8 characters long, containing at least one lowercase, one uppercase, one digit, and one special character" required>
+                        <button type="submit" class="mt-10 flex justify-center py-2 px-10 text-white rounded-3xl text-center bg-gray-800 bg-opacity-40 border border-gray-200 hover:bg-blue-700">Создать Аккаунт</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="lg:hidden flex h-full w-full flex-col justify-center items-center">
+        <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-4 py-8 sm:px-10 sm:py-10 md:px-16 md:py-16 shadow-2xl backdrop-blur-md">
+            <div class=" flex w-48 h-48 mx-auto rounded-lg">
+                <img src="/api/static/images/svgexport-1.svg"  alt="VK ID">
+            </div>
+            <div class="relative">
+
+                <h1 class="text-center mt-4 text-sm text-white text-xl md:text-3xl mb-4">Регистрация</h1>
+            </div>
+            <div class="absolute top-2 sm:-right-20 size-16 sm:w-36 sm:h-36">
+                <a href="/api/v1/">
+                    <svg width="50px" height="50px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" fill-rule="evenodd" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)">
+                            <circle cx="8.5" cy="8.5" r="8"/>
+                            <g transform="matrix(0 1 -1 0 17 0)">
+                                <path d="m5.5 11.5 6-6"/>
+                                <path d="m5.5 5.5 6 6"/>
+                            </g>
+                        </g>
+                    </svg>
+
+                </a>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <div class="flex flex-col">
+
+                    <form id="loginFormMobile" action="/api/v1/users/register" method="post" class="flex flex-col items-center justify-center mt-16 px-14 space-y-6">
+
+                        <div class="relative">
+                            <svg class="absolute top-1/2 transform -translate-y-1/2 left-4 fill-current text-gray-400" width="30" height="30" viewBox="0 0 100 100">     <path d="M66.097,12.089h-56.9C4.126,12.089,0,16.215,0,21.286v32.722c0,5.071,4.126,9.197,9.197,9.197h56.9
+		                    c5.071,0,9.197-4.126,9.197-9.197V21.287C75.295,16.215,71.169,12.089,66.097,12.089z M61.603,18.089L37.647,33.523L13.691,18.089
+		                    H61.603z M66.097,57.206h-56.9C7.434,57.206,6,55.771,6,54.009V21.457l29.796,19.16c0.04,0.025,0.083,0.042,0.124,0.065
+		                    c0.043,0.024,0.087,0.047,0.131,0.069c0.231,0.119,0.469,0.215,0.712,0.278c0.025,0.007,0.05,0.01,0.075,0.016
+		                    c0.267,0.063,0.537,0.102,0.807,0.102c0.001,0,0.002,0,0.002,0c0.002,0,0.003,0,0.004,0c0.27,0,0.54-0.038,0.807-0.102
+		                    c0.025-0.006,0.05-0.009,0.075-0.016c0.243-0.063,0.48-0.159,0.712-0.278c0.044-0.022,0.088-0.045,0.131-0.069
+		                    c0.041-0.023,0.084-0.04,0.124-0.065l29.796-19.16v32.551C69.295,55.771,67.86,57.206,66.097,57.206z"/>
+                            </svg>
+                            <input  type="email" name="email" class="  rounded-3xl bg-gray-800 bg-opacity-40 border border-gray-300 text-white text-center  px-16 py-2 pl-svg" placeholder="user@vk.com" title="Please enter a valid email address" required>
+
+                        </div>
+
+                        <div class="relative">
+                            <input type="password" name="password" class="rounded-3xl bg-gray-800 bg-opacity-40 border border-gray-300 text-white text-center px-16 py-2" placeholder="******" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{8,}$" title="Password should be at least 8 characters long, containing at least one lowercase, one uppercase, one digit, and one special character" required>
+
+                            <svg class="absolute top-1/2 transform -translate-y-1/2 left-4 fill-current text-gray-400" width="30" height="30" viewBox="0 0 50 50"><path d="M37.076,19.748c-0.824,0-1.494,0.672-1.494,1.499v1.46h2.991v-1.46C38.573,20.42,37.9,19.748,37.076,19.748z"/>
+                                <path d="M41.227,12.635H5.773C2.6,12.635,0,15.237,0,18.41v10.18c0,3.178,2.6,5.775,5.773,5.775h35.454
+			                    C44.4,34.365,47,31.768,47,28.59V18.41C47,15.237,44.4,12.635,41.227,12.635z M12.56,25.077l1.385,1.508l-2.399,1.8l-0.984-1.8
+			                    c-0.145-0.257-0.372-0.761-0.691-1.508c-0.349,0.821-0.581,1.321-0.696,1.508l-0.998,1.8l-2.466-1.8l1.491-1.508
+			                    c0.42-0.415,0.827-0.771,1.229-1.063c-0.41-0.037-0.949-0.113-1.614-0.238l-2.065-0.336l0.958-2.812l1.852,0.842
+			                    c0.195,0.088,0.68,0.365,1.452,0.824c-0.165-0.747-0.271-1.302-0.319-1.666l-0.263-2.013h2.941l-0.238,2.013
+			                    c-0.052,0.49-0.166,1.045-0.335,1.666c0.339-0.17,0.563-0.283,0.669-0.345c0.372-0.207,0.659-0.35,0.852-0.442l1.853-0.879
+			                    l0.918,2.812l-2.049,0.428c-0.375,0.072-0.931,0.119-1.67,0.146C11.874,24.406,12.266,24.758,12.56,25.077z M26.137,25.077
+			                    l1.387,1.508l-2.399,1.799l-0.983-1.799c-0.145-0.257-0.372-0.761-0.69-1.508c-0.35,0.821-0.58,1.321-0.695,1.508l-1,1.799
+			                    l-2.465-1.799l1.491-1.508c0.42-0.415,0.826-0.771,1.229-1.063c-0.408-0.037-0.949-0.113-1.614-0.238l-2.066-0.336l0.959-2.812
+		                        l1.853,0.842c0.193,0.088,0.68,0.365,1.451,0.824c-0.169-0.747-0.275-1.302-0.32-1.666l-0.264-2.011h2.942l-0.239,2.011
+			                    c-0.054,0.49-0.166,1.045-0.333,1.666c0.337-0.17,0.561-0.283,0.668-0.345c0.37-0.207,0.658-0.35,0.852-0.442l1.854-0.879
+			                    l0.919,2.812l-2.051,0.428c-0.375,0.072-0.929,0.119-1.669,0.146C25.451,24.406,25.844,24.758,26.137,25.077z M41.35,27.625
+			                    c0,0.619-0.507,1.125-1.125,1.125H33.93c-0.619,0-1.125-0.506-1.125-1.125v-3.794c0-0.619,0.506-1.125,1.125-1.125h0.152v-1.46
+			                    c0-1.653,1.343-2.998,2.994-2.998c1.652,0,2.996,1.344,2.996,2.998v1.46h0.152c0.617,0,1.125,0.506,1.125,1.125V27.625z"/>
+                            </svg>
+                        </div>
+                        <button type="submit" class="mt-10 flex justify-center py-2 px-10 text-white rounded-3xl text-center bg-gray-800 bg-opacity-40 border border-gray-200 hover:bg-blue-700">Создать Аккаунт</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
