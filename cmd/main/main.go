@@ -35,6 +35,7 @@ func main() {
 	router.Static("/uploads", "./uploads")
 	router.NoRoute(handlers.NoRouteHandler)
 	router.GET("/", handlers.WelcomeHandler)
+	router.GET("/401", handlers.UnAuthHandler)
 	router.GET("/login", handlers.LoginHandler)
 	router.POST("/login", handlers.ProcessLoginHandler)
 	router.GET("/register", handlers.RegistrationHandler)

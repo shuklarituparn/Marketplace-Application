@@ -26,25 +26,28 @@
                     body: formDataJsonString,
                 }
                 const response = await fetch(url, fetchOptions);
-
                 if (!response.ok) {
-                    responsecode=response.status
-                    switch (responsecode){
-                        case response.status=303:
-
+                    const responsecode = response.status;
+                    switch (responsecode) {
+                        case 401:
+                            window.location.replace("401");
+                            break;
                     }
                     const errorMessage = await response.text();
-                    window.location.replace("404.html");
                     throw new Error(errorMessage);
+                } else {
+                    window.location.replace("success.html");
+                    return response.json();
                 }
 
-                return response.json();
+
+
             }
 
             async function handleformsubmit(event) {
                 event.preventDefault();
                 const form = event.currentTarget;
-                const url = form.action;
+                const url = "http://localhost:5000/api/v1/users/login";
                 try {
                     const formData = new FormData(form);
                     const responseData = await postFormDataAsJson({url, formData});

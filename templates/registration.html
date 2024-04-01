@@ -37,7 +37,7 @@
             async function handleformsubmit(event) {
                 event.preventDefault();
                 const form = event.currentTarget;
-                const url = form.action;
+                const url = "http://localhost:5000/regi";
                 try {
                     const formData = new FormData(form);
                     const responseData = await postFormDataAsJson({url, formData});
