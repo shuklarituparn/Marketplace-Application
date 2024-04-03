@@ -30,13 +30,16 @@
                     const responsecode = response.status;
                     switch (responsecode) {
                         case 401:
-                            window.location.replace("401");
+                            window.location.replace("/401");
+                            break;
+                        case 500:
+                            window.location.replace("/500");
                             break;
                     }
                     const errorMessage = await response.text();
                     throw new Error(errorMessage);
                 } else {
-                    window.location.replace("success.html");
+                    window.location.replace("/success_login");
                     return response.json();
                 }
 

@@ -27,17 +27,28 @@
                 }
                 const response = await fetch(url, fetchOptions);
                 if (!response.ok) {
+                    const responsecode = response.status;
+                    switch (responsecode) {
+                        case 401:
+                            window.location.replace("/401");
+                            break;
+                        case 500:
+                            window.location.replace("/500");
+                            break;
+
+                    }
                     const errorMessage = await response.text();
                     throw new Error(errorMessage);
+                } else {
+                    window.location.replace("/success_register")
+                    return response.json();
                 }
-
-                return response.json();
             }
 
             async function handleformsubmit(event) {
                 event.preventDefault();
                 const form = event.currentTarget;
-                const url = "http://localhost:5000/regi";
+                const url = "http://localhost:5000/api/v1/users/register";
                 try {
                     const formData = new FormData(form);
                     const responseData = await postFormDataAsJson({url, formData});

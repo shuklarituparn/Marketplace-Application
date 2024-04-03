@@ -37,7 +37,9 @@ func main() {
 	router.GET("/", handlers.WelcomeHandler)
 	router.GET("/401", handlers.UnAuthHandler)
 	router.GET("/login", handlers.LoginHandler)
-	router.POST("/login", handlers.ProcessLoginHandler)
+	router.GET("/500", handlers.BadRequestHandler)
+	router.GET("/success_register", handlers.RegisterSuccess)
+	router.GET("/success_login", handlers.LoginSuccess)
 	router.GET("/register", handlers.RegistrationHandler)
 	router.POST("/register", handlers.ProcessRegistrationHandler)
 
