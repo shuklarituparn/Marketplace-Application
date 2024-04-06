@@ -56,6 +56,9 @@ func WelcomeEmailConsumer() {
 		log.Printf("Received message on %s: %s\n", msg.TopicPartition, string(msg.Value))
 
 		err = json.Unmarshal(msg.Value, &EmailMessage)
+		if err != nil {
+			return
+		}
 		filepath := WelcomeTempGenerator(EmailMessage.Email, EmailMessage.Password)
 
 		SendMail(filepath, EmailMessage.Email, "Welcome to VK-Marketplace")

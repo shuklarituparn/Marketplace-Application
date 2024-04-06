@@ -19,12 +19,15 @@ func ProcessRegistrationHandler(ctx *gin.Context) {
 	var registermailModel models.RegisterUserModel
 	err := json.Unmarshal(body, &registermailModel)
 	if err != nil {
-		ctx.AbortWithError(http.StatusInternalServerError, err)
+		ctx.Abort()
 		return
 	}
 	//TODO: Create a producer with the data
 	p, err := producer.NewProducer("localhost:9092")
-	err = producer.ProduceNewMessage(p, "welcomeMail", string(body))
+	errorMessage := producer.ProduceNewMessage(p, "welcomeMail", string(body))
+	if errorMessage != nil {
+		return
+	}
 	if err != nil {
 		return
 	}
