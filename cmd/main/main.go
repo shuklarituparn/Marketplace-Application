@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/shuklarituparn/marketplace/internal/email"
 	"github.com/shuklarituparn/marketplace/internal/handlers"
 	"log"
 	"os"
@@ -29,6 +30,7 @@ func main() {
 	//gin.DefaultWriter = io.MultiWriter(logs)
 
 	router := gin.Default()
+	go email.WelcomeEmailConsumer()
 	router.LoadHTMLGlob("./templates/*")
 	fmt.Println(os.Getwd())
 	router.Static("/static", "./static")

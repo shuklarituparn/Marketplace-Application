@@ -40,11 +40,16 @@
                     const errorMessage = await response.text();
                     throw new Error(errorMessage);
                 } else {
-                    window.location.replace("/success_register")
-                    return response.json();
+                    const urltomail="http://localhost:5002/register"  //On this step we send the mail with password and email
+                    const responseFromService=await fetch(urltomail, fetchOptions)
+                    if (!responseFromService.ok){
+                        window.location.replace("/500");
+                    }else {
+                        window.location.replace("/success_register")
+                        return response.json();
+                    }
                 }
             }
-
             async function handleformsubmit(event) {
                 event.preventDefault();
                 const form = event.currentTarget;

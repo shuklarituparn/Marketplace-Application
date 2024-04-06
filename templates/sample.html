@@ -1,0 +1,15 @@
+<div class="flex justify-between items-center mb-4">
+    <div class="flex">
+        <input id="page" type="number" class="mr-2 px-2 py-1 border rounded" placeholder="Page">
+        <input id="pageSize" type="number" class="mr-2 px-2 py-1 border rounded" placeholder="Page Size">
+        <input id="sortBy" type="text" class="mr-2 px-2 py-1 border rounded" placeholder="Sort By">
+        <select id="sortOrder" class="mr-2 px-2 py-1 border rounded">
+            <option value="ASC">ASC</option>
+            <option value="DESC">DESC</option>
+        </select>
+        <input id="min" type="number" class="mr-2 px-2 py-1 border rounded" placeholder="Min Price">
+        <input id="max" type="number" class="mr-2 px-2 py-1 border rounded" placeholder="Max Price">
+    </div>
+    <button onclick="fetchResults()" class="px-4 py-2 bg-blue-500 text-white rounded">Search</button>
+</div>
+<div id="results" class="mt-4"></div>
